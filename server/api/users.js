@@ -4,6 +4,8 @@ const {
 } = require("../db");
 module.exports = router;
 
+// o: protect this route or remove it if its not going to be used... maybe get
+//  rid of since you don't have admins
 router.get("/", async (req, res, next) => {
   try {
     const users = await User.findAll({

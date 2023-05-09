@@ -2,6 +2,8 @@ import React from "react";
 
 //EDIT ME!!
 
+// o: remove if going away
+
 const Canvas = () => {
   return (
     <div id="container">

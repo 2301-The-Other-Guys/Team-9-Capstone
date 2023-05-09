@@ -8,9 +8,12 @@ import axios from "axios";
 /*
   THUNKS
 */
+// o: you don't want try catches usually in your thunks
 export const fetchTasks = createAsyncThunk("fetchTasks", async (id) => {
   try {
     console.log(id);
+    // o: you should not be passing the userId... remember you can retrieve it
+    //  from the token on the backend
     const { data } = await axios.get("/api/tasks", { params: { userId: id } });
     console.log(data);
     return data;

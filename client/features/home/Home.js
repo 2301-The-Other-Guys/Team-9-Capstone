@@ -26,6 +26,9 @@ const Home = () => {
       </span>
       <div className="scroll-box">
         <ul>
+          {/*
+            o: change this to tasks.length > 0 to check if tasks exist
+          */}
           {tasks ? (
             tasks.map((task) => {
               return <li key={task.id}>{task.title}</li>;

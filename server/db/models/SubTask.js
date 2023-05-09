@@ -2,7 +2,9 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 const Task = require("./Task");
 
+// o: is a subtask just a task with a parent id?
 const SubTask = db.define("subTask", {
+  // o: you don't need to add this, as its added automatically
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,

@@ -47,6 +47,7 @@ const AddTask = () => {
           onChange={(date) => setDueDate(date)}
         />
         <label htmlFor="priority">Priority:</label>
+        {/* o: you may want to think about retrieving this list from the backend (nice to have) */}
         <select
           name="priority"
           value={priority}
