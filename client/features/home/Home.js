@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTasks } from "../slices/TaskSlice";
 import { selectTasks } from "../slices/TaskSlice";
@@ -16,19 +16,43 @@ const Home = () => {
   const tasks = useSelector(selectTasks);
   const currentDate = new Date().toLocaleDateString();
   const totalTasksCompleted = tasks.filter((task) => task.isCompleted === true);
+  const [sortOption, setSortOption] = useState("");
+  const [search, setSearch] = useState("");
   const topLevelTasks = tasks.filter(
     (task) => !task.parentId && !task.isCompleted
   );
+  const [filteredTasks, setFilteredTasks] = useState(topLevelTasks);
   const getSubtasks = (taskId) => {
     return tasks.filter(
       (task) => task.parentId === taskId && !task.isCompleted
     );
   };
+
+  useEffect(() => {
+    const searchTasks = (tasks, searchTerm) => {
+      const filteredTasks = tasks.filter((task) =>
+        task.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      tasks.forEach((task) => {
+        if (task.subtasks) {
+          const filteredSubtasks = searchTasks(task.subtasks, searchTerm);
+          filteredTasks.push(...filteredSubtasks);
+        }
+      });
+
+      return filteredTasks.filter((task) => !task.isCompleted);
+    };
+
+    const updatedFilteredTasks = searchTasks(tasks, search);
+    setFilteredTasks(updatedFilteredTasks);
+  }, [search, tasks]);
+
   const handleUpdate = (taskId) => {
     const taskToUpdate = tasks.find((task) => task.id === taskId);
     const updatedTask = { ...taskToUpdate, isCompleted: true };
     dispatch(updateTask(updatedTask));
   };
+
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
@@ -50,8 +74,40 @@ const Home = () => {
       </header>
 
       <main className="overflow-auto p-6 mt-5 w-1/2 max-h-80 mx-auto rounded-md shadow-darker bg-blue-900">
-        {topLevelTasks.length > 0 ? (
-          topLevelTasks.map((task) => (
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-grow">
+            <input
+              type="text"
+              className="text-lg shadow rounded flex items-center justify-start p-2 border-b-2 border-white shadow-darker transition-colors"
+              id="searchInput"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          <div className="ml-4">
+            <label
+              htmlFor="Sort"
+              className="block text-sm font-medium text-white"
+            >
+              Sort:
+            </label>
+            <div className="shadow-darker">
+              <select
+                id="Sort"
+                name="Sort"
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+                className="text-lg bg-blue-900 mt-1 block rounded-md border-b-2 border-white outline-none shadow-darker"
+              >
+                <option>Sort</option>
+                {/* Add your sort options here */}
+              </select>
+            </div>
+          </div>
+        </div>
+        {filteredTasks.length > 0 ? (
+          filteredTasks.map((task) => (
             <TaskItem
               key={task.id}
               task={task}
