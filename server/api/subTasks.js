@@ -3,6 +3,8 @@ const {
   models: { SubTask },
 } = require("../db");
 
+// o: is this still being used? ... if not remove
+
 //find all belonging to user
 router.get("/", async (req, res, next) => {
   const { taskId } = req.params;

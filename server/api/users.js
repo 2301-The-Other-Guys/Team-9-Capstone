@@ -3,6 +3,8 @@ const {
   models: { User },
 } = require("../db");
 
+// o: this will work but let's talk about the downsides
+
 // POST /api/users/upload-image - Endpoint to handle image uploads
 router.post("/upload-image", (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -29,6 +31,8 @@ router.post("/upload-image", (req, res, next) => {
 
     // Get the user ID from the request
     const { userId } = req.body;
+
+    // o: why are you using thenable statements?
 
     // Update the user record with the uploaded image filename
     User.findByPk(userId)

@@ -3,9 +3,6 @@ const User = require("../db/models/User");
 const router = require("express").Router();
 module.exports = router;
 
-// o: some sample to get req.user set on every request (please test before
-//  adding)
-
 router.use("/users", require("./users"));
 router.use("/tasks", require("./tasks"));
 router.use("/subTasks", require("./subTasks"));

@@ -15,6 +15,8 @@ const Calendar = () => {
 
   const tasks = useSelector(selectTasks);
 
+  // o: remove unused code
+
   // const [title] = tasks;
 
   // console.log(tasks)

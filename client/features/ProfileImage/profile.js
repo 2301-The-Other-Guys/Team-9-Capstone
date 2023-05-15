@@ -24,6 +24,7 @@ const Profile = () => {
   data.append('image', selectedImage);
   data.append('userId', user.id); // replace 'user.id' with the id of the user
 
+  // o: change this to async / await
   axios.post('/api/users/upload-image', data)
     .then(response => {
       console.log('Image uploaded successfully');

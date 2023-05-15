@@ -89,6 +89,7 @@ export const taskSlice = createSlice({
       })
       .addCase(updateTask.fulfilled, (state, action) => {
         const updatedTask = action.payload;
+
         const index = state.tasks.findIndex(
           (task) => task.id === updatedTask.id
         );

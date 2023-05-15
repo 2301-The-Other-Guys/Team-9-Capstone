@@ -9,6 +9,9 @@ import { selectTasks } from "../slices/TaskSlice";
 const AddTask = () => {
   const dispatch = useDispatch("");
 
+  // o: good work using redux and react as needed
+
+  // o: remove unused code
   //const [, set] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

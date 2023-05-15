@@ -50,6 +50,7 @@ const Task = db.define("task", {
   },
 });
 
+// o: i don't think this works right?
 Task.findTasksAndSubtasks = async function (userId) {
   const allTasks = await Task.findAll({
     where: {

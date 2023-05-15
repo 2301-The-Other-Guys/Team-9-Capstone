@@ -26,6 +26,8 @@ const Home = () => {
   };
   const handleUpdate = (taskId) => {
     const taskToUpdate = tasks.find((task) => task.id === taskId);
+    // o: there is no need to copy the task over you can just do taskToUpdate.isCompleted = true
+    //  and then send that in the request
     const updatedTask = { ...taskToUpdate, isCompleted: true };
     dispatch(updateTask(updatedTask));
   };
@@ -66,6 +68,8 @@ const Home = () => {
     </div>
   );
 };
+
+// o: nicely done! 🙂
 
 // Extracted TaskItem component
 const TaskItem = ({ task, getSubtasks, handleUpdate }) => {
