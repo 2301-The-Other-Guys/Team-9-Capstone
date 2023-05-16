@@ -4,6 +4,7 @@ import { fetchTasks } from "../slices/TaskSlice";
 import { selectTasks } from "../slices/TaskSlice";
 // import { subTaskSlice } from "../slices/SubTaskSlice";
 import { updateTask } from "../slices/TaskSlice";
+import { deleteTask } from "../slices/TaskSlice";
 import profileSlice from "../slices/profileSlice";
 /**
  * COMPONENT
@@ -18,6 +19,8 @@ const Home = () => {
   const totalTasksCompleted = tasks.filter((task) => task.isCompleted === true);
   const [sortOption, setSortOption] = useState("");
   const [search, setSearch] = useState("");
+  const [showDetails, setShowDetails] = useState(false);
+
   const topLevelTasks = tasks.filter(
     (task) => !task.parentId && !task.isCompleted
   );
@@ -27,7 +30,7 @@ const Home = () => {
       (task) => task.parentId === taskId && !task.isCompleted
     );
   };
-
+  //search function
   useEffect(() => {
     const searchTasks = (tasks, searchTerm) => {
       const filteredTasks = tasks.filter((task) =>
@@ -50,13 +53,15 @@ const Home = () => {
   const handleUpdate = (taskId) => {
     const taskToUpdate = tasks.find((task) => task.id === taskId);
     const updatedTask = { ...taskToUpdate, isCompleted: true };
+
     dispatch(updateTask(updatedTask));
   };
-
+  const handleDeleteTask = (taskId) => {
+    dispatch(deleteTask(taskId));
+  };
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
-  console.log("tasks", tasks);
 
   return (
     <div className="flex flex-col h-screen  px-10">
@@ -85,11 +90,9 @@ const Home = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <div className="ml-4">
-            <label
-              htmlFor="Sort"
-              className="block text-sm font-medium text-white"
-            >
+          {/* below is sort for future feature */}
+          {/* <div className="ml-4">
+            <label htmlFor="Sort" className="block font-medium text-white">
               Sort:
             </label>
             <div className="shadow-darker">
@@ -98,13 +101,13 @@ const Home = () => {
                 name="Sort"
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
-                className="text-lg bg-blue-900 mt-1 block rounded-md border-b-2 border-white outline-none shadow-darker"
+                className="text-lg bg-blue-900 mt-1 block rounded-md border-b-2 border-white outline-none shadow-darker hover:bg-gray-500 transition-colors hover:scale-110"
               >
                 <option>Sort</option>
-                {/* Add your sort options here */}
+                Add your sort options here
               </select>
             </div>
-          </div>
+          </div> */}
         </div>
         {filteredTasks.length > 0 ? (
           filteredTasks.map((task) => (
@@ -113,6 +116,7 @@ const Home = () => {
               task={task}
               getSubtasks={getSubtasks}
               handleUpdate={handleUpdate}
+              handleDeleteTask={handleDeleteTask}
             />
           ))
         ) : (
@@ -124,8 +128,9 @@ const Home = () => {
 };
 
 // Extracted TaskItem component
-const TaskItem = ({ task, getSubtasks, handleUpdate }) => {
+const TaskItem = ({ task, getSubtasks, handleUpdate, handleDeleteTask }) => {
   const subtasks = getSubtasks(task.id);
+  const [showDetails, setShowDetails] = useState(false);
 
   return (
     <ul className="list-none my-2 p-1">
@@ -137,7 +142,24 @@ const TaskItem = ({ task, getSubtasks, handleUpdate }) => {
           onChange={() => handleUpdate(task.id)}
         />
         <span className="flex-1 text-white">{task.title}</span>
+        <button
+          className="text-blue-500"
+          onClick={() => setShowDetails(!showDetails)}
+        >
+          {showDetails ? "Hide Details" : "Show Details"}
+        </button>
       </li>
+      {showDetails ? (
+        <li className="list-none text-center indent-2 text-sm ml-8 justify-between">
+          {task.description}
+          {task.dueDate}
+          {/* <button className="text-red-500" onClick={handleDeleteTask(task.id)}>
+            Delete
+          </button> */}
+        </li>
+      ) : (
+        <li></li>
+      )}
       {subtasks.map((subtask) => (
         <li
           key={subtask.id}

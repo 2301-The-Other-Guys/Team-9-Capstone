@@ -44,6 +44,10 @@ export const updateTask = createAsyncThunk(
     return response.data;
   }
 );
+export const deleteTask = createAsyncThunk("deleteTask", async (taskId) => {
+  await axios.delete(`tasks/${taskId}`);
+  return taskId;
+});
 /*
   SLICE
 */
@@ -95,6 +99,13 @@ export const taskSlice = createSlice({
         if (index !== -1) {
           state.tasks[index] = updatedTask;
         }
+      })
+      .addCase(deleteTask.pending, (state) => {
+        console.log("pending");
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        const taskId = action.payload;
+        return state.tasks.filter((task) => task.id !== taskId);
       });
   },
 });
