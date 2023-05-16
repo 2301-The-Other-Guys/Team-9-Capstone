@@ -44,7 +44,7 @@ const SignUpForm = ({ name = "signup", displayName = "signup" }) => {
                 name="username"
                 type="text"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray placeholder-gray text-white rounded-t-md focus:outline-none focus:ring-indigo-500 focus:z-10 sm:text-sm bg-white"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray placeholder-gray text-gray rounded-t-md focus:outline-none focus:ring-indigo-500 focus:z-10 sm:text-sm bg-white"
                 placeholder="Username"
               />
             </div>
@@ -82,7 +82,11 @@ const SignUpForm = ({ name = "signup", displayName = "signup" }) => {
               {displayName}
             </button>
             <button className="text-white">
-              Already have an account? <Link to="/login" className="text-indigo-600 hover:underline"> Login here </Link>
+              Already have an account?{" "}
+              <Link to="/login" className="text-indigo-600 hover:underline">
+                {" "}
+                Login here{" "}
+              </Link>
             </button>
           </div>
           {error && <div className="text-red-500 mt-2">{error}</div>}

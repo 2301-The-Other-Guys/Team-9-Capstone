@@ -7,16 +7,18 @@ module.exports = {
     extend: {
       boxShadow: {
         'darker': '0 25px 50px -12px rgba(0, 0, 0, 0.75)',
-        textColor: {
-          'placeholder-white': ['placeholder-white'],
+      },
+      textColor: {
+        'placeholder-white': ['placeholder-white'],
+      },
     },
   },
-  },
-},
   variants: {
     extend: {
-      textColor: ['responsove', 'hover', 'focus', 'placeholder'],
+      textColor: ['responsive', 'hover', 'focus', 'placeholder'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/custom-forms')
+  ],
 };

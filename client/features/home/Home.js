@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { fetchTasks } from "../slices/TaskSlice";
 import { selectTasks } from "../slices/TaskSlice";
 // import { subTaskSlice } from "../slices/SubTaskSlice";
@@ -12,6 +13,9 @@ import profileSlice from "../slices/profileSlice";
 const Home = () => {
   const dispatch = useDispatch();
 
+  const [quote, setQuote] = useState("");
+  const [author, setAuthor] = useState("");
+  const [error, setError] = useState(null);
   const username = useSelector((state) => state.auth.me.username);
   const avatarUrl = useSelector((state) => state.auth.me.avatarUrl);
   const tasks = useSelector(selectTasks);
@@ -61,18 +65,46 @@ const Home = () => {
   };
   useEffect(() => {
     dispatch(fetchTasks());
+
+    const getQuote = async () => {
+      const options = {
+        method: "GET",
+        url: "https://quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com/quote",
+        params: { token: "ipworld.info" },
+        headers: {
+          "X-RapidAPI-Key":
+            "b159225c68msh5fd1fb52aa0baffp1d930bjsn15ba437e2687",
+          "X-RapidAPI-Host":
+            "quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com",
+        },
+      };
+
+      try {
+        const response = await axios.request(options);
+        setQuote(response.data);
+        setAuthor(response.data.author);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+        setError(error.message);
+      }
+    };
+
+    getQuote();
   }, [dispatch]);
 
   return (
     <div className="flex flex-col h-screen  px-10">
       <header className="flex flex-col items-center mt-10 mb-5">
-        <h1 className="text-2xl text-white underline">Welcome, {username}</h1>
+        <h1 className="text-2xl text-white underline">Welcome, {username}!</h1>
+        {error && <p className="text-lg text-red-500">{error}</p>}
+        {author && <p className="text-2xl text-white">-{author}</p>}
+        {quote && <p className="text-2xl text-white">"{quote.text}"</p>}
         <img
           src={avatarUrl}
           alt="Profile"
           className="w-16 h-16 rounded-full my-4"
         />
-        <h2 className="text-2xl text-white underline">{currentDate}</h2>
         <h3 className="text-2xl text-white underline">
           Total Tasks Completed: {totalTasksCompleted.length}
         </h3>
@@ -163,7 +195,7 @@ const TaskItem = ({ task, getSubtasks, handleUpdate, handleDeleteTask }) => {
       {subtasks.map((subtask) => (
         <li
           key={subtask.id}
-          className="list-none text-center indent-2 text-sm ml-8"
+          className="list-none text-center indent-2 text-sm ml-8 text-white text-lg"
         >
           <input
             type="checkbox"
