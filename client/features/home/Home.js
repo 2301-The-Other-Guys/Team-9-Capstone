@@ -60,6 +60,17 @@ const Home = () => {
 
     dispatch(updateTask(updatedTask));
   };
+  // const handleUpdateTask = (taskId, updatedTitle, updatedDescription) => {
+  //   const taskToUpdate = tasks.find((task) => task.id === taskId);
+  //   const updatedTask = {
+  //     ...taskToUpdate,
+  //     title: updatedTitle,
+  //     description: updatedDescription,
+  //   };
+  //   console.log("test", taskId, updatedTitle, updatedDescription);
+  //   console.log(updatedTask);
+  //   dispatch(updateTask(updatedTask));
+  // };
   const handleDeleteTask = (taskId) => {
     dispatch(deleteTask(taskId));
   };
@@ -149,6 +160,8 @@ const Home = () => {
               getSubtasks={getSubtasks}
               handleUpdate={handleUpdate}
               handleDeleteTask={handleDeleteTask}
+
+              // handleUpdateTask={handleUpdateTask}
             />
           ))
         ) : (
@@ -160,10 +173,35 @@ const Home = () => {
 };
 
 // Extracted TaskItem component
-const TaskItem = ({ task, getSubtasks, handleUpdate, handleDeleteTask }) => {
+const TaskItem = ({
+  task,
+  getSubtasks,
+  handleUpdate,
+  // handleDeleteTask,
+  // tasks,
+  // handleUpdateTask,
+}) => {
   const subtasks = getSubtasks(task.id);
   const [showDetails, setShowDetails] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [updatedTitle, setUpdatedTitle] = useState("");
+  const [updatedDescription, setUpdatedDescription] = useState("");
+  const dispatch = useDispatch();
 
+  const handleUpdateTask = (taskId, updatedTitle, updatedDescription) => {
+    // const taskToUpdate = tasks.find((task) => task.id === taskId);
+    const updatedTask = {
+      ...taskToUpdate,
+      id: taskId,
+      title: updatedTitle,
+      description: updatedDescription,
+    };
+    console.log("test", taskId, updatedTitle, updatedDescription);
+    console.log(updatedTask);
+    dispatch(updateTask(updatedTask));
+    setUpdatedDescription("");
+    setUpdatedTitle("");
+  };
   return (
     <ul className="list-none my-2 p-1">
       <li className="text-lg shadow- rounded flex items-center justify-start mb-2 p-2 border-b-2 border-white shadow-darker hover:bg-gray-500 transition-colors">
@@ -175,22 +213,60 @@ const TaskItem = ({ task, getSubtasks, handleUpdate, handleDeleteTask }) => {
         />
         <span className="flex-1 text-white">{task.title}</span>
         <button
-          className="text-blue-500"
+          className="text-blue-500 "
           onClick={() => setShowDetails(!showDetails)}
         >
           {showDetails ? "Hide Details" : "Show Details"}
         </button>
+        <button
+          className="text-blue-500 m-5"
+          onClick={() => setShowEdit(!showEdit)}
+        >
+          {showEdit ? "Edit" : "Edit"}
+        </button>
       </li>
       {showDetails ? (
-        <li className="list-none text-center indent-2 text-sm ml-8 justify-between">
-          {task.description}
-          {task.dueDate}
-          {/* <button className="text-red-500" onClick={handleDeleteTask(task.id)}>
+        <div className="justify-between">
+          <li className="list-none text-center indent-2 text-center text-gray-500 ml-8">
+            Description: {task.description}
+            {/* <button className="text-red-500" onClick={handleDeleteTask(task.id)}>
             Delete
           </button> */}
-        </li>
+          </li>
+          <li className="text-center text-gray-500 ml-8">{task.dueDate}</li>
+        </div>
       ) : (
         <li></li>
+      )}
+      {/* edit/delete tasks portion */}
+      {showEdit ? (
+        <div className="text-center">
+          Title:
+          <input
+            type="text"
+            name="title"
+            value={updatedTitle}
+            onChange={(e) => setUpdatedTitle(e.target.value)}
+            className="border bg-gray-200 rounded m-5"
+          />
+          Description:
+          <input
+            name="description"
+            value={updatedDescription}
+            onChange={(e) => setUpdatedDescription(e.target.value)}
+            className="border bg-gray-200 rounded m-5"
+          />
+          <button
+            className="text-gray-500"
+            onClick={() =>
+              handleUpdateTask(task.id, updatedTitle, updatedDescription)
+            }
+          >
+            Save
+          </button>
+        </div>
+      ) : (
+        <div></div>
       )}
       {subtasks.map((subtask) => (
         <li

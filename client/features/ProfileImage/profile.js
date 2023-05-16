@@ -21,16 +21,17 @@ const Profile = () => {
     dispatch(setProfileImage(selectedImage));
     // Logic to upload the selected image goes here
     const data = new FormData();
-  data.append('image', selectedImage);
-  data.append('userId', user.id); // replace 'user.id' with the id of the user
+    data.append("image", selectedImage);
+    data.append("userId", user.id); // replace 'user.id' with the id of the user
 
-  axios.post('/api/users/upload-image', data)
-    .then(response => {
-      console.log('Image uploaded successfully');
-    })
-    .catch(error => {
-      console.error('Error uploading image:', error);
-    });
+    axios
+      .post("/api/users/upload-image", data)
+      .then((response) => {
+        console.log("Image uploaded successfully");
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+      });
   };
 
   return (

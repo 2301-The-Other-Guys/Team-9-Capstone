@@ -67,7 +67,7 @@ const AddTask = () => {
           <div>
             <label
               htmlFor="title"
-              className="block text-lg font-medium text-white "
+              className="block text-lg font-medium text-white"
             >
               Title:
             </label>
