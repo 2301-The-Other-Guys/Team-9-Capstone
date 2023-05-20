@@ -1,14 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../slices/profileSlice";
-import { Link } from "react-router-dom";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const fileInputRef = useRef(null);
   const currentUser = useSelector((state) => state.auth.me);
-  const email = currentUser.email;
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    setEmail(currentUser.email);
+  }, [currentUser]);
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
@@ -69,7 +72,7 @@ const Profile = () => {
           </div>
 
           <div className="flex flex-col space-y-2">
-            <label htmlFor="name" className="text-lg font-medium text-white">
+            {/* <label htmlFor="name" className="text-lg font-medium text-white">
               User Name
             </label>
             <input
@@ -78,9 +81,9 @@ const Profile = () => {
               name="name"
               className="bg-gray-600 rounded-md border-b-2 border-white p-2 outline-none"
               style={{ boxShadow: "5px 5px 10px rgba(0,0,0,0.3)" }}
-            />
+            /> */}
 
-            <label htmlFor="email" className="text-lg font-medium text-white">
+            {/* <label htmlFor="email" className="text-lg font-medium text-white">
               Email
             </label>
             <input
@@ -90,7 +93,7 @@ const Profile = () => {
               value={email}
               className="bg-gray-600 rounded-md border-b-2 border-white p-2 outline-none"
               style={{ boxShadow: "5px 5px 10px rgba(0,0,0,0.3)" }}
-            />
+            /> */}
 
             <button
               type="button"
@@ -113,6 +116,7 @@ const Profile = () => {
           </div>
         )}
       </main>
+
       <div>
         <div
           id="background-theme"

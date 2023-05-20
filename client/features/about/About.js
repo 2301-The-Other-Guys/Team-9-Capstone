@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const About = () => {
   const location = useLocation();
@@ -14,39 +13,49 @@ const About = () => {
         <Link
           to="https://www.linkedin.com/in/rubintollinchi/"
           title="Profile"
-          className="flex flex-col items-center justify-center w-40 h-40 mb-10 rounded-full transform hover:scale-110 transition-transform"
+          className="flex flex-col items-center justify-center w-30 h-30 mb-10 rounded-full transform hover:scale-110 transition-transform"
         >
-          <img className="w-30 h-30" src="user.png" alt="User Icon" />
-          <h3 className="text-white">Rubin Tollinchi</h3>
-          <p className="text-white">Email: {email}</p>
+          <img className="w-40 h-40" src="user.png" alt="User Icon" />
+          <div className="text-white text-center mt-2">
+            <h3 className="text-sm">Rubin Tollinchi Age: 32</h3>
+            <p className="text-xs">r123@email.com</p>
+          </div>
         </Link>
 
         <Link
           to="https://www.linkedin.com/in/rodney-johnson-dwight/"
           title="Profile"
-          className="flex flex-col items-center justify-center w-40 h-40 mb-10 rounded-full transform hover:scale-110 transition-transform"
+          className="flex flex-col items-center justify-center w-30 h-30 mb-10 rounded-full transform hover:scale-110 transition-transform"
         >
-          <img className="w-30 h-30" src="user.png" alt="User Icon" />
-          <h3 className="text-white">Rodney Johnson</h3>
-          <p className="text-white">Email: {email}</p>
+          <img className="w-40 h-40" src="user.png" alt="User Icon" />
+          <div className="text-white text-center mt-2">
+            <h3 className="text-sm">Rodney Johnson Age: 53</h3>
+            <p className="text-xs">rdwightjohnson@outlook.com</p>
+          </div>
         </Link>
         <Link
           to="https://www.linkedin.com/in/emmanuel-lucero/"
           title="Profile"
-          className="flex flex-col items-center justify-center w-40 h-40 mb-10 rounded-full transform hover:scale-110 transition-transform"
+          className="flex flex-col items-center justify-center w-30 h-30 mb-10 rounded-full transform hover:scale-110 transition-transform"
+          email={email}
         >
-          <img className="w-30 h-30" src="user.png" alt="User Icon" />
-          <h3 className="text-white">Emmanuel Lucero</h3>
-          <p className="text-white">Email: {email}</p>
+          <img className="w-40 h-40" src="user.png" alt="User Icon" />
+          <div className="text-white text-center mt-2">
+            <h3 className="text-sm">Emmanuel Lucero Age: 30</h3>
+            <p className="text-xs">e123@email.com</p>
+          </div>
         </Link>
         <Link
           to="https://www.linkedin.com/in/nicholas-treasure/"
           title="Profile"
-          className="flex flex-col items-center justify-center w-40 h-40 mb-10 rounded-full transform hover:scale-110 transition-transform"
+          className="flex flex-col items-center justify-center w-30 h-30 mb-10 rounded-full transform hover:scale-110 transition-transform"
+          email={email}
         >
-          <img className="w-30 h-30" src="user.png" alt="User Icon" />
-          <h3 className="text-white">Nicholas Treasure</h3>
-          <p className="text-white">Email: {email}</p>
+          <img className="w-40 h-$0" src="user.png" alt="User Icon" />
+          <div className="text-white text-center mt-2">
+            <h3 className="text-sm">Nicholas Treasure Age: 35</h3>
+            <p className="text-xs">n123@email.com</p>
+          </div>
         </Link>
       </div>
 
@@ -99,7 +108,7 @@ const About = () => {
           </span>
           <p className="text-white m-5">
             Profile page allows you to personalize this To-Do Genie for you. Has
-            multiple theme selections to choose from and caan upload your
+            multiple theme selections to choose from and can upload your
             personal profile image.
           </p>
         </div>
