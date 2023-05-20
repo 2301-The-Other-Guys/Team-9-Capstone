@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const About = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const email = searchParams.get("email");
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-4xl text-white underline align m-10">About Page</h1>
@@ -13,6 +18,7 @@ const About = () => {
         >
           <img className="w-30 h-30" src="user.png" alt="User Icon" />
           <h3 className="text-white">Rubin Tollinchi</h3>
+          <p className="text-white">Email: {email}</p>
         </Link>
 
         <Link
@@ -22,6 +28,7 @@ const About = () => {
         >
           <img className="w-30 h-30" src="user.png" alt="User Icon" />
           <h3 className="text-white">Rodney Johnson</h3>
+          <p className="text-white">Email: {email}</p>
         </Link>
         <Link
           to="https://www.linkedin.com/in/emmanuel-lucero/"
@@ -30,6 +37,7 @@ const About = () => {
         >
           <img className="w-30 h-30" src="user.png" alt="User Icon" />
           <h3 className="text-white">Emmanuel Lucero</h3>
+          <p className="text-white">Email: {email}</p>
         </Link>
         <Link
           to="https://www.linkedin.com/in/nicholas-treasure/"
@@ -38,6 +46,7 @@ const About = () => {
         >
           <img className="w-30 h-30" src="user.png" alt="User Icon" />
           <h3 className="text-white">Nicholas Treasure</h3>
+          <p className="text-white">Email: {email}</p>
         </Link>
       </div>
 

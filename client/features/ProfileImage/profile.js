@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../slices/profileSlice";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -69,7 +70,7 @@ const Profile = () => {
 
           <div className="flex flex-col space-y-2">
             <label htmlFor="name" className="text-lg font-medium text-white">
-              Name
+              User Name
             </label>
             <input
               type="text"
