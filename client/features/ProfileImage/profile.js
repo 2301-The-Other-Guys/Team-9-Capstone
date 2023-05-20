@@ -80,13 +80,14 @@ const Profile = () => {
               style={{ boxShadow: "5px 5px 10px rgba(0,0,0,0.3)" }}
             />
 
-            <label htmlFor="age" className="text-lg font-medium text-white">
-              Age
+            <label htmlFor="email" className="text-lg font-medium text-white">
+              Email
             </label>
             <input
-              type="number"
-              id="age"
-              name="age"
+              type="email"
+              id="email"
+              name="email"
+              value={email}
               className="bg-gray-600 rounded-md border-b-2 border-white p-2 outline-none"
               style={{ boxShadow: "5px 5px 10px rgba(0,0,0,0.3)" }}
             />
