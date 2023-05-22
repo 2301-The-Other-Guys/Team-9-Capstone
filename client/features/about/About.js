@@ -17,8 +17,8 @@ const About = () => {
         >
           <img className="w-40 h-40" src="user.png" alt="User Icon" />
           <div className="text-white text-center mt-2">
-            <h3 className="text-sm">Rubin Tollinchi Age: 32</h3>
-            <p className="text-xs">r123@email.com</p>
+            <h3 className="text-sm">Rubin Tollinchi</h3>
+            <p className="text-xs">rtollinchi23@gmail.com</p>
           </div>
         </Link>
 
@@ -29,7 +29,7 @@ const About = () => {
         >
           <img className="w-40 h-40" src="user.png" alt="User Icon" />
           <div className="text-white text-center mt-2">
-            <h3 className="text-sm">Rodney Johnson Age: 53</h3>
+            <h3 className="text-sm">Rodney Johnson</h3>
             <p className="text-xs">rdwightjohnson@outlook.com</p>
           </div>
         </Link>
@@ -41,8 +41,8 @@ const About = () => {
         >
           <img className="w-40 h-40" src="user.png" alt="User Icon" />
           <div className="text-white text-center mt-2">
-            <h3 className="text-sm">Emmanuel Lucero Age: 30</h3>
-            <p className="text-xs">e123@email.com</p>
+            <h3 className="text-sm">Emmanuel Lucero</h3>
+            <p className="text-xs">eMannylucero49@yahoo.com</p>
           </div>
         </Link>
         <Link
@@ -53,8 +53,8 @@ const About = () => {
         >
           <img className="w-40 h-$0" src="user.png" alt="User Icon" />
           <div className="text-white text-center mt-2">
-            <h3 className="text-sm">Nicholas Treasure Age: 35</h3>
-            <p className="text-xs">n123@email.com</p>
+            <h3 className="text-sm">Nicholas Treasure</h3>
+            <p className="text-xs">ntreasure14@gmail.com</p>
           </div>
         </Link>
       </div>
